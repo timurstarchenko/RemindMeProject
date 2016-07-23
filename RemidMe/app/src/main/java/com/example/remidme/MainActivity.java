@@ -17,7 +17,7 @@ public class MainActivity extends AppCompatActivity {
 
     private static final int LAYOUT = R.layout.activity_main;
     private Toolbar toolbar;
-    private DrawerLayout drowerLayout;
+    private DrawerLayout drawerLayout;
     private ViewPager viewPager;
 
     @Override
@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void intTabs() {
         viewPager = (ViewPager)findViewById(R.id.viewPager);
-        TabsPagerFragmentAdapter adapter = new TabsPagerFragmentAdapter(getSupportFragmentManager());
+        TabsPagerFragmentAdapter adapter = new TabsPagerFragmentAdapter(this, getSupportFragmentManager());
         viewPager.setAdapter(adapter);
 
         TabLayout tabLayout = (TabLayout)findViewById(R.id.tabLayout);
@@ -54,11 +54,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initNavigationView() {
-        drowerLayout = (DrawerLayout)findViewById(R.id.drawerLayout);
+        drawerLayout = (DrawerLayout)findViewById(R.id.drawerLayout);
 
         //иконка для NavigationView
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drowerLayout, toolbar, R.string.view_navigation_open, R.string.view_navigation_close);
-        drowerLayout.addDrawerListener(toggle);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.view_navigation_open, R.string.view_navigation_close);
+        drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
 
         NavigationView navigationView = (NavigationView)findViewById(R.id.navigation);
@@ -66,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public boolean onNavigationItemSelected(MenuItem item) {
                 //закрытие NavigationView при нажатии на пункт меню
-                drowerLayout.closeDrawers();
+                drawerLayout.closeDrawers();
 
                 switch (item.getItemId()){
                     case R.id.actionNotificationItem:
