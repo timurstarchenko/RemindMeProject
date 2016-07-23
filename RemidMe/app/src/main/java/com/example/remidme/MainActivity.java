@@ -1,8 +1,10 @@
 package com.example.remidme;
 
+import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -53,5 +55,30 @@ public class MainActivity extends AppCompatActivity {
 
     private void initNavigationView() {
         drowerLayout = (DrawerLayout)findViewById(R.id.drawerLayout);
+
+        //иконка для NavigationView
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drowerLayout, toolbar, R.string.view_navigation_open, R.string.view_navigation_close);
+        drowerLayout.addDrawerListener(toggle);
+        toggle.syncState();
+
+        NavigationView navigationView = (NavigationView)findViewById(R.id.navigation);
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(MenuItem item) {
+                //закрытие NavigationView при нажатии на пункт меню
+                drowerLayout.closeDrawers();
+
+                switch (item.getItemId()){
+                    case R.id.actionNotificationItem:
+                    //при нажатии на пункт меню открываем соответствующий фрагмент
+                    showNotificationTab();
+                }
+                return true;
+            }
+        });
+    }
+
+    private void showNotificationTab(){
+        viewPager.setCurrentItem(Constans.TAB_TWO);
     }
 }
